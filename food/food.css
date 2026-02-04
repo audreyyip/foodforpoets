@@ -1,11 +1,18 @@
-/* * {
-    box-sizing: border-box;
-  } */
 
-body{
-    background-image: url("imgs/background.jpeg");
-    margin: 3vw;
-    padding: 3vw;
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-right: 20px 4em; 
+}
+.column-left{
+    background-image: url("/imgs/background.jpeg");
+    text-align: center;
+}
+.column-right{
+    background-color: aliceblue;
+    padding: 3em;
 }
 
 h1{
@@ -13,7 +20,7 @@ h1{
     font-family: "Barrio", system-ui;
     font-weight: 400;
     font-style: normal;
-    font-size: 10em;
+    font-size: 5em;
     margin-block-start:0em;
     margin-block-end: 0em;
 }
@@ -23,35 +30,30 @@ h3{
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
-    font-size: 2.5em;
+    font-size: 2em;
 }
 p{
     color: rgb(13, 13, 58);
     font-family: "Josefin Slab", serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 2em;
+    line-height: 1.5;
+    font-size: 1.5em;
     margin-block-start:0em;
     margin-block-end: 0em;
 }
 
-.heading{
+/* .heading{
   width: fit-content;
   height: fit-content;
   margin-bottom: 5em;
-}
+} */
 
 .strawberries, .shrimp, .chocolatemilk, .sandwich {
   position: absolute;
-  padding: 5px;
-  text-align: center;
-}
-.strawberries:hover, .shrimp:hover, .chocolatemilk:hover, .sandwich:hover {
-  cursor: pointer;
-  transform: scale(1.2);
-  transition: transform 0.2s;
 }
 
+/* 
 .strawberries {
   left: 850px; 
   top: 70px;
@@ -70,17 +72,13 @@ p{
 .sandwich {
   left: 800px; 
   top: 400px;
-}
+} */
 
-  img { 
-      display: inline-block; 
-  }
-  
   #sandwich{
-    margin: 50px;
-    height:500px; 
+    right: 500px; 
+    top: 100px;
+    height:1000px; 
     width:auto;
-    rotate: -20deg;   
   }
   
   #strawberries{
@@ -99,6 +97,5 @@ p{
     padding: 10px;
     height:400px; 
     width:auto; 
-    rotate: 10deg;
   }
   
