@@ -35,6 +35,15 @@ p{
     margin-block-end: 0em;
 }
 
+.wrapper{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
 .heading{
   width: fit-content;
   height: fit-content;
@@ -42,7 +51,7 @@ p{
 }
 
 .strawberries, .shrimp, .chocolatemilk, .sandwich {
-  position: absolute;
+  position:absolute;
   padding: 5px;
   text-align: center;
 }
