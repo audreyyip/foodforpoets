@@ -108,4 +108,14 @@ p{
     width:auto; 
     rotate: 10deg;
   }
+
+  #picnicbasket{
+    position: absolute;
+    left: 1px; 
+    top: 500px;
+    height: 1000px;
+    width: auto;
+    margin: 0;
+    padding:0;
+  }
   
