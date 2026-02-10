@@ -50,7 +50,15 @@ p{
   height: 150vh;
   width: auto;
   width: 100%;
-  border: 5px solid green;
+  /* border: 5px solid green; */
+}
+
+#basket{
+  position: relative;
+  width: 80vw;
+  height:auto;
+  margin: 0;
+  padding:0;
 }
 
 .heading{
@@ -68,26 +76,6 @@ p{
   cursor: pointer;
 }
 
-/* .strawberries {
-  left: 850px; 
-  top: 70px;
-}
-
-.shrimp {
-  left: 500px; 
-  top: 550px;
-}
-
-.chocolatemilk {
-  left: 50px; 
-  top: 550px;
-}
-
-.sandwich {
-  left: 800px; 
-  top: 400px;
-} */
-
   img { 
       display: inline-block; 
   }
@@ -96,27 +84,36 @@ p{
     rotate: -20deg;   
   }
   
-  /* #strawberries{
-    padding: 10px;   
-  } */
-  
-  /* #shrimp{
-    padding: 10px; 
-  } */
-  
   #chocolatemilk{
-    /* padding: 10px;  */
     rotate: 10deg;
   }
 
-  #basket{
+  #mouth{
     position: relative;
-    width: 80vw;
+    top: 20vh;
+    width: 20vw;
     height:auto;
-    margin: 0;
-    padding:0;
   }
-  
+
+  .mouth{
+    display: flex;
+    align-items: flex-end;
+    justify-content:end;
+  }
+
+  .dragging {
+    opacity: 0.5;
+}
+
+  .eaten {
+      opacity: 0;
+      transform: scale(0.5);
+  }
+
+  .mouth-active {
+      filter: brightness(1.2);
+  }
+    
 
   @media (max-width: 500px) {
     body{
@@ -156,28 +153,32 @@ p{
         margin-block-start:0em;
         margin-block-end: 0em;
     }
+
+    .basket{
+      width: 100%;
+      height: 120vw;
+      /* border: 5px solid green; */
+    }
     
     #basket{
-      position: relative;
-      rotate: 90deg;
-      top: 5vh;
-      width: 150vw;
-      height:auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(90deg);
+      width: 120vw;
     }
 
     #mouth{
       position: relative;
-      top: 5vh;
+      top: 100vh;
       width: 30vw;
       height:auto;
     }
 
     .mouth{
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      top: 50vh;
+      align-items: flex-end;
+      justify-content:end;
     }
 
     .food img{

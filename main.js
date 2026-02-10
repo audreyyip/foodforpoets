@@ -8,7 +8,57 @@ $(document).ready(function () {
         $(id).draggable();
         enableTouchDrag(document.querySelector(id));
     });
+    setupMouthDrop();
 });
+
+function setupMouthDrop() {
+    const mouth = document.getElementById('mouth');
+    const foodItems = document.querySelectorAll('.food');
+
+    if (!mouth) return;
+
+    // Make food items draggable (for desktop)
+    foodItems.forEach(item => {
+        item.draggable = true;
+        
+        item.addEventListener('dragstart', (e) => {
+            e.dataTransfer.effectAllowed = 'move';
+            item.classList.add('dragging');
+        });
+        
+        item.addEventListener('dragend', (e) => {
+            item.classList.remove('dragging');
+        });
+    });
+
+    // Set up the mouth as a drop target
+    mouth.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        mouth.classList.add('mouth-active');
+    });
+
+    mouth.addEventListener('dragleave', (e) => {
+        mouth.classList.remove('mouth-active');
+    });
+
+    mouth.addEventListener('drop', (e) => {
+        e.preventDefault();
+        
+        const draggedItem = document.querySelector('.dragging');
+        
+        if (draggedItem) {
+            draggedItem.classList.add('eaten');
+            
+            setTimeout(() => {
+                draggedItem.remove();
+            }, 300);
+        }
+        
+        mouth.classList.remove('mouth-active');
+    });
+}
+
 
 function enableTouchDrag(element) {
     if (!element) return;
@@ -73,13 +123,13 @@ function enableTouchDrag(element) {
 
 
 
-// obtained from chatgpt
+// obtained from chatgpt, randomised positioning of food items in the basket
 const foods = document.querySelectorAll('.food img');
 const basketImg = document.querySelector('#basket');
 
-function centerRandom(min, max) {
-    return Math.random() * (max - min) + min;
-}
+// function centerRandom(min, max) {
+//     return Math.random() * (max - min) + min;
+// }
 
 window.addEventListener('load', () => {
 
