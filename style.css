@@ -165,8 +165,23 @@ p{
       height:auto;
     }
 
+    #mouth{
+      position: relative;
+      top: 5vh;
+      width: 30vw;
+      height:auto;
+    }
+
+    .mouth{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      top: 50vh;
+    }
+
     .food img{
-      width: 40vw;
+      width: 50vw;
       height: auto;
     }
   
