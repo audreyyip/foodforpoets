@@ -4,62 +4,71 @@
 
 body{
     background-image: url("imgs/background.jpeg");
-    margin: 3vw;
-    padding: 3vw;
 }
 
 h1{
-    color: rgb(13, 13, 58);
-    font-family: "Barrio", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 10em;
-    margin-block-start:0em;
-    margin-block-end: 0em;
+  color: rgb(13, 13, 58);
+  font-family: "Barrio", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15vw;
+  margin-block-start:0em;
+  margin-block-end: 0em;
 }
 h3{
-    color: rgb(13, 13, 58);
-    font-family: "Josefin Slab", serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 2.5em;
+  color: rgb(13, 13, 58);
+  font-family: "Josefin Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 3vw;
 }
 p{
-    color: rgb(13, 13, 58);
-    font-family: "Josefin Slab", serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 2em;
-    margin-block-start:0em;
-    margin-block-end: 0em;
+  color: rgb(13, 13, 58);
+  font-family: "Josefin Slab", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2em;
+  margin-block-start:0em;
+  margin-block-end: 0em;
 }
 
 .wrapper{
-  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  padding-top: 3vw;
+  padding-left: 3vw;
+  position: relative;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 100%;
+  height: 250vh;
+  /* border: 5px solid hotpink; */
+}
+.basket{
+  position: relative;
+  height: 150vh;
+  width: auto;
   width: 100%;
-  height: 100vh;
+  border: 5px solid green;
 }
 
 .heading{
   width: fit-content;
   height: fit-content;
-  margin-bottom: 5em;
+  margin-bottom: 5vh;
 }
 
-.strawberries, .shrimp, .chocolatemilk, .sandwich {
-  position:absolute;
-  padding: 5px;
-  text-align: center;
+.food img{
+  width:20vw; 
+  height:auto;  
 }
-.strawberries:hover, .shrimp:hover, .chocolatemilk:hover, .sandwich:hover {
+
+.food:hover {
   cursor: pointer;
 }
 
-.strawberries {
+/* .strawberries {
   left: 850px; 
   top: 70px;
 }
@@ -77,45 +86,88 @@ p{
 .sandwich {
   left: 800px; 
   top: 400px;
-}
+} */
 
   img { 
       display: inline-block; 
   }
   
   #sandwich{
-    margin: 50px;
-    height:500px; 
-    width:auto;
     rotate: -20deg;   
   }
   
-  #strawberries{
-    padding: 10px;
-    height:300px; 
-    width:auto;   
-  }
+  /* #strawberries{
+    padding: 10px;   
+  } */
   
-  #shrimp{
-    padding: 10px;
-    height:400px; 
-    width:auto;   
-  }
+  /* #shrimp{
+    padding: 10px; 
+  } */
   
   #chocolatemilk{
-    padding: 10px;
-    height:400px; 
-    width:auto; 
+    /* padding: 10px;  */
     rotate: 10deg;
   }
 
-  #picnicbasket{
-    position: absolute;
-    left: 1px; 
-    top: 500px;
-    height: 1000px;
-    width: auto;
+  #basket{
+    position: relative;
+    width: 80vw;
+    height:auto;
     margin: 0;
     padding:0;
   }
   
+
+  @media (max-width: 500px) {
+    body{
+      background-image: url("imgs/background.jpeg");
+      background-size:cover;
+    }
+    .wrapper{
+      /* margin: 2vw;
+      padding: 2vw; */
+      max-width: 100%;
+      height: 200vh;
+    }
+
+    .heading{
+      width: fit-content;
+      height: fit-content;
+      margin-bottom: 10vh;
+    }
+
+    h1{
+      font-size: 30vw;
+    }
+
+    h3{
+        font-weight: 500;
+        font-style: normal;
+        font-optical-sizing: auto;
+        font-size: 8vw;
+        line-height: 1.3em;
+    }
+    p{
+        color: rgb(13, 13, 58);
+        font-family: "Josefin Slab", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 2em;
+        margin-block-start:0em;
+        margin-block-end: 0em;
+    }
+    
+    #basket{
+      position: relative;
+      rotate: 90deg;
+      top: 5vh;
+      width: 150vw;
+      height:auto;
+    }
+
+    .food img{
+      width: 40vw;
+      height: auto;
+    }
+  
+  }
