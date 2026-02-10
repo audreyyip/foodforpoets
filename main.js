@@ -1,11 +1,75 @@
 
 // js code extracted from class demos from last year
 
+$(document).ready(function () {
+    const draggableIds = ["#sandwich", "#strawberries", "#shrimp", "#chocolatemilk"];
 
-$(document).ready(function() {$("#sandwich").draggable(); })
-$(document).ready(function() {$("#strawberries").draggable(); })
-$(document).ready(function() {$("#shrimp").draggable(); })
-$(document).ready(function() {$("#chocolatemilk").draggable(); })
+    draggableIds.forEach((id) => {
+        $(id).draggable();
+        enableTouchDrag(document.querySelector(id));
+    });
+});
+
+function enableTouchDrag(element) {
+    if (!element) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let offsetX = 0;
+    let offsetY = 0;
+    let suppressClick = false;
+
+    element.addEventListener(
+        "touchstart",
+        (event) => {
+            const touch = event.touches[0];
+            const rect = element.getBoundingClientRect();
+
+            isDragging = true;
+            startX = touch.clientX;
+            startY = touch.clientY;
+            offsetX = touch.clientX - rect.left;
+            offsetY = touch.clientY - rect.top;
+            suppressClick = false;
+        },
+        { passive: true }
+    );
+
+    element.addEventListener(
+        "touchmove",
+        (event) => {
+            if (!isDragging) return;
+
+            const touch = event.touches[0];
+            const parentRect = element.offsetParent.getBoundingClientRect();
+
+            const deltaX = Math.abs(touch.clientX - startX);
+            const deltaY = Math.abs(touch.clientY - startY);
+            if (deltaX > 6 || deltaY > 6) suppressClick = true;
+
+            element.style.left = touch.clientX - parentRect.left - offsetX + "px";
+            element.style.top = touch.clientY - parentRect.top - offsetY + "px";
+
+            event.preventDefault();
+        },
+        { passive: false }
+    );
+
+    ["touchend", "touchcancel"].forEach((eventName) => {
+        element.addEventListener(eventName, () => {
+            isDragging = false;
+        });
+    });
+
+    element.addEventListener("click", (event) => {
+        if (suppressClick) {
+            event.preventDefault();
+            event.stopPropagation();
+            suppressClick = false;
+        }
+    });
+}
 
 
 // obtained from chatgpt
