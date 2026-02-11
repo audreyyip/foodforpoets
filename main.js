@@ -1,5 +1,4 @@
 
-// js code extracted from class demos from last year
 
 $(document).ready(function () {
     const draggableIds = ["#sandwich", "#strawberries", "#shrimp", "#chocolatemilk"];
@@ -8,56 +7,62 @@ $(document).ready(function () {
         $(id).draggable();
         enableTouchDrag(document.querySelector(id));
     });
-    setupMouthDrop();
+    // setupMouthDrop();
+    $("#mouth").click(function(){
+        $("#sandwich").hide();
+        $("#strawberries").hide();
+        $("#shrimp").hide();
+        $("#chocolatemilk").hide();});
 });
-
-function setupMouthDrop() {
-    const mouth = document.getElementById('mouth');
-    const foodItems = document.querySelectorAll('.food');
-
-    if (!mouth) return;
-
-    // Make food items draggable (for desktop)
-    foodItems.forEach(item => {
-        item.draggable = true;
         
-        item.addEventListener('dragstart', (e) => {
-            e.dataTransfer.effectAllowed = 'move';
-            item.classList.add('dragging');
-        });
-        
-        item.addEventListener('dragend', (e) => {
-            item.classList.remove('dragging');
-        });
-    });
 
-    // Set up the mouth as a drop target
-    mouth.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        mouth.classList.add('mouth-active');
-    });
+// function setupMouthDrop() {
+//     const mouth = document.getElementById('mouth');
+//     const foodItems = document.querySelectorAll('.food');
 
-    mouth.addEventListener('dragleave', (e) => {
-        mouth.classList.remove('mouth-active');
-    });
+//     if (!mouth) return;
 
-    mouth.addEventListener('drop', (e) => {
-        e.preventDefault();
+//     // Make food items draggable (for desktop)
+//     foodItems.forEach(item => {
+//         item.draggable = true;
         
-        const draggedItem = document.querySelector('.dragging');
+//         item.addEventListener('dragstart', (e) => {
+//             e.dataTransfer.effectAllowed = 'move';
+//             item.classList.add('dragging');
+//         });
         
-        if (draggedItem) {
-            draggedItem.classList.add('eaten');
+//         item.addEventListener('dragend', (e) => {
+//             item.classList.remove('dragging');
+//         });
+//     });
+
+//     // Set up the mouth as a drop target
+//     mouth.addEventListener('dragover', (e) => {
+//         e.preventDefault();
+//         e.dataTransfer.dropEffect = 'move';
+//         mouth.classList.add('mouth-active');
+//     });
+
+//     mouth.addEventListener('dragleave', (e) => {
+//         mouth.classList.remove('mouth-active');
+//     });
+
+//     mouth.addEventListener('drop', (e) => {
+//         e.preventDefault();
+        
+//         const draggedItem = document.querySelector('.dragging');
+        
+//         if (draggedItem) {
+//             draggedItem.classList.add('eaten');
             
-            setTimeout(() => {
-                draggedItem.remove();
-            }, 300);
-        }
+//             setTimeout(() => {
+//                 draggedItem.remove();
+//             }, 300);
+//         }
         
-        mouth.classList.remove('mouth-active');
-    });
-}
+//         mouth.classList.remove('mouth-active');
+//     });
+// }
 
 
 function enableTouchDrag(element) {
