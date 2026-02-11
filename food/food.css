@@ -5,7 +5,7 @@
     margin-right: 20px 4em; 
 }
 .column-left{
-    background-image: url("/imgs/background.jpeg");
+    background-image: url("../imgs/background.jpeg");
     text-align: center;
 }
 .column-right{
