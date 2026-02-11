@@ -106,7 +106,7 @@ function enableTouchDrag(element) {
             element.style.left = touch.clientX - parentRect.left - offsetX + "px";
             element.style.top = touch.clientY - parentRect.top - offsetY + "px";
 
-            event.preventDefault();
+            // event.preventDefault();
         },
         { passive: false }
     );
@@ -163,6 +163,31 @@ window.addEventListener('load', () => {
     });
 
 });
+
+
+$(document).ready(function() {
+    const modal = document.getElementById('myWindow');
+    const btn = document.getElementById('openWindow');
+    const closeBtn = document.querySelector('.close');
+
+    // Open modal when button is clicked
+    btn.addEventListener('click', function() {
+        modal.style.display = 'block';
+    });
+
+    // Close modal when X is clicked
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside of it
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
+
 
 // $(document).ready(function() {
 //     $("#sandwich").hover(function(){
