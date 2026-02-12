@@ -54,39 +54,64 @@ p{
 } */
 
 .food img{
-  position: relative;
+  position: sticky;
+  width:30vw;
+  height:auto;
 }
-
-  #sandwich{
-    /* right: 500px; 
-    top: 100px;
-    height:1000px;  */
-    width:30vw;
-    height:auto;
-  }
-  
-  #strawberries{
-    width:30vw;
-    height:auto;
-  }
   
   #shrimp{
-    padding: 10px;
-    height:400px; 
-    width:auto;   
+    padding: 10px; 
   }
   
   #chocolatemilk{
     padding: 10px;
-    height:400px; 
-    width:auto; 
   }
 
   #home{
-    position: absolute;
-    left: 50px; 
-    top: 50px;
-    height: 50px;
+    position: fixed;
+    left: 2vw; 
+    top: 2vw;
+    height: 5vw;
     width: auto;
+    transition: transform 0.3s ease;
+  }
+
+  #home-hover{
+    transform: scale(1.2);
+  }
+
+  a {
+    color: rgb(25, 81, 210); 
+    text-decoration: wavy underline 0.5px;
   }
   
+  @media (max-width: 500px) {
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+    .column-left, .column-right {
+        padding: 1.5em;
+    }
+    h1 {
+        font-size: 3em;
+    }
+    h3 {
+        font-size: 1.5em;
+    }
+    p {
+        font-size: 1em;
+    }
+
+    #home{
+      position: fixed;
+      left: 5vw; 
+      top: 5vw;
+      height: 15vw;
+      width: auto;
+    }
+    .food img{
+      position: sticky;
+      width:50vw;
+      height:auto;
+    }
+  }

@@ -69,7 +69,8 @@ p{
 
 .food img{
   width:20vw; 
-  height:auto;  
+  height:auto; 
+  position: sticky; 
 }
 
 .food:hover {
@@ -173,12 +174,17 @@ p{
   text-align: center;
 }
 
+a {
+  color: plum; 
+  text-decoration: none;
+}
 
   @media (max-width: 500px) {
     body{
       background-image: url("imgs/background.jpeg");
       background-size:cover;
     }
+
     .wrapper{
       /* margin: 2vw;
       padding: 2vw; */
@@ -241,7 +247,7 @@ p{
     }
 
     .food img{
-      width: 50vw;
+      width: 40vw;
       height: auto;
     }
   
