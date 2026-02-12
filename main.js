@@ -2,18 +2,22 @@
 
 $(document).ready(function () {
     const draggableIds = ["#sandwich", "#strawberries", "#shrimp", "#chocolatemilk"];
+    // Get the element with the id "myElement"
 
     draggableIds.forEach((id) => {
         $(id).draggable();
         enableTouchDrag(document.querySelector(id));
     });
     // setupMouthDrop();
-    $("#mouth").click(function(){
-        $("#sandwich").hide();
-        $("#strawberries").hide();
-        $("#shrimp").hide();
-        $("#chocolatemilk").hide();});
+    $("#mouth").click(function() {
+
+        $(".food").addClass("eaten");   // hides all food at once
+    
+        $(this).css("transform", "scale(2)");
+    
+    });
 });
+    
         
 
 // function setupMouthDrop() {

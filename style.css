@@ -115,6 +115,7 @@ p{
     top: 20vh;
     width: 10vw;
     height:auto;
+    transition: transform 1s ease;
   }
 
   .mouth{
@@ -127,10 +128,6 @@ p{
     opacity: 0.5;
 }
 
-  .eaten {
-      opacity: 0;
-      transform: scale(0.5);
-  }
 
   .mouth-active {
       filter: brightness(1.2);
@@ -160,6 +157,11 @@ p{
     max-width: 500px;
     position: relative;
     animation: slideDown 0.3s ease;
+}
+
+.eaten {
+  opacity:0;
+  transition: opacity 1s ease;
 }
 
 /* Slide down animation */
