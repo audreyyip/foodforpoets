@@ -1,27 +1,26 @@
-.body{
-  background: 100%;
-}
-
 .two-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-right: 20px 4em; 
-    min-height:100%;
+    padding-bottom: 10vh;
+    background-color: rgb(240, 247, 255);
 }
 .column-left{
     display: flex;
     flex-direction: column;
     align-items:center;
     padding-top: 10vh;
+    padding-bottom: 10vh;
     background-image: url("../imgs/background.jpeg");
     text-align: center;
+    
+
 }
 .column-right{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: aliceblue;
     padding: 3em;
+
 }
 
 h1{
@@ -60,6 +59,7 @@ p{
 
 .food img{
   position: sticky;
+  top: 5vh;
   width:30vw;
   height:auto;
 }
@@ -86,7 +86,7 @@ p{
   }
 
   a {
-    color: rgb(25, 81, 210); 
+    color: rgb(43, 84, 180); 
     text-decoration: wavy underline 0.5px;
   }
   
