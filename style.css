@@ -218,14 +218,14 @@ p{
     }
 
     h1{
-      font-size: 25vw;
+      font-size: 15vw;
     }
 
     h3{
         font-weight: 500;
         font-style: normal;
         font-optical-sizing: auto;
-        font-size: 8vw;
+        font-size: 6vw;
         line-height: 1.3em;
     }
     p{
