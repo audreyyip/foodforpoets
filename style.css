@@ -174,11 +174,6 @@ p{
   text-align: center;
 }
 
-a {
-  color: plum; 
-  text-decoration: none;
-}
-
   @media (max-width: 500px) {
     body{
       background-image: url("imgs/background.jpeg");
