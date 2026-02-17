@@ -6,19 +6,37 @@ $(document).ready(function () {
 
     draggableIds.forEach((id) => {
         $(id).draggable({
-            containment: "window"
+            containment: "window",
+
+            stop: function(event, ui) {
+
+            const mouth = document.querySelector("#mouth");
+
+            if (isOverlapping(this, mouth)) {
+                $(this).addClass("eaten");
+            }
+         }
         });
         enableTouchDrag(document.querySelector(id));
     });
-    $("#mouth").click(function() {
 
-        $(".food").addClass("eaten");   // hides all food at once
+    $("#mouth").droppable({
+        accept: ".food img",   // only allow food items
+        drop: function(event, ui) {
     
-        $(this).css("transform", "scale(2)");
+            // ui.draggable = the element being dragged
+            $(ui.draggable).addClass("eaten");
+    
+        }
+    // });
+    // $("#mouth").click(function() {
+
+    //     $(".food").addClass("eaten");   // hides all food at once
+    
+    //     $(this).css("transform", "scale(2)");
     
     });
 });
-    
 
 
 
@@ -122,25 +140,30 @@ window.addEventListener('load', () => {
 });
 
 
-$(document).ready(function() {
-    const modal = document.getElementById('myWindow');
-    const btn = document.getElementById('openWindow');
-    const closeBtn = document.querySelector('.close');
+// MOUTH DRAGGING
 
-    // Open modal when button is clicked
-    btn.addEventListener('click', function() {
-        modal.style.display = 'block';
-    });
+function isOverlapping(el1, el2) {
 
-    // Close modal when X is clicked
-    closeBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
+    const r1 = el1.getBoundingClientRect();
+    const r2 = el2.getBoundingClientRect();
 
-    // Close modal when clicking outside of it
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
+    return !(
+        r1.right < r2.left ||
+        r1.left > r2.right ||
+        r1.bottom < r2.top ||
+        r1.top > r2.bottom
+    );
+}
+
+
+["touchend", "touchcancel"].forEach((eventName) => {
+    element.addEventListener(eventName, () => {
+        isDragging = false;
+
+        const mouth = document.querySelector("#mouth");
+
+        if (isOverlapping(element, mouth)) {
+            element.classList.add("eaten");
         }
     });
 });
