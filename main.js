@@ -5,10 +5,11 @@ $(document).ready(function () {
     // Get the element with the id "myElement"
 
     draggableIds.forEach((id) => {
-        $(id).draggable();
+        $(id).draggable({
+            containment: "window"
+        });
         enableTouchDrag(document.querySelector(id));
     });
-    // setupMouthDrop();
     $("#mouth").click(function() {
 
         $(".food").addClass("eaten");   // hides all food at once
@@ -18,55 +19,7 @@ $(document).ready(function () {
     });
 });
     
-        
 
-// function setupMouthDrop() {
-//     const mouth = document.getElementById('mouth');
-//     const foodItems = document.querySelectorAll('.food');
-
-//     if (!mouth) return;
-
-//     // Make food items draggable (for desktop)
-//     foodItems.forEach(item => {
-//         item.draggable = true;
-        
-//         item.addEventListener('dragstart', (e) => {
-//             e.dataTransfer.effectAllowed = 'move';
-//             item.classList.add('dragging');
-//         });
-        
-//         item.addEventListener('dragend', (e) => {
-//             item.classList.remove('dragging');
-//         });
-//     });
-
-//     // Set up the mouth as a drop target
-//     mouth.addEventListener('dragover', (e) => {
-//         e.preventDefault();
-//         e.dataTransfer.dropEffect = 'move';
-//         mouth.classList.add('mouth-active');
-//     });
-
-//     mouth.addEventListener('dragleave', (e) => {
-//         mouth.classList.remove('mouth-active');
-//     });
-
-//     mouth.addEventListener('drop', (e) => {
-//         e.preventDefault();
-        
-//         const draggedItem = document.querySelector('.dragging');
-        
-//         if (draggedItem) {
-//             draggedItem.classList.add('eaten');
-            
-//             setTimeout(() => {
-//                 draggedItem.remove();
-//             }, 300);
-//         }
-        
-//         mouth.classList.remove('mouth-active');
-//     });
-// }
 
 
 function enableTouchDrag(element) {
@@ -101,14 +54,14 @@ function enableTouchDrag(element) {
             if (!isDragging) return;
 
             const touch = event.touches[0];
-            const parentRect = element.offsetParent.getBoundingClientRect();
+            const parentRect = element.offsetParent;
 
             const deltaX = Math.abs(touch.clientX - startX);
             const deltaY = Math.abs(touch.clientY - startY);
             if (deltaX > 6 || deltaY > 6) suppressClick = true;
 
-            element.style.left = touch.clientX - parentRect.left - offsetX + "px";
-            element.style.top = touch.clientY - parentRect.top - offsetY + "px";
+            element.style.left = touch.clientX - offsetX + parentRect.scrollLeft + "px";
+            element.style.top = touch.clientY - offsetY + parentRect.scrollTop + "px";
 
             // event.preventDefault();
         },

@@ -1,7 +1,11 @@
+body{
+  background-image: url("imgs/background.jpeg");
+  max-width:100%;
+}
+
 .two-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding-bottom: 10vh;
     background-color: rgb(240, 247, 255);
 }
 .column-left{
@@ -20,7 +24,11 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 3em;
+    padding-bottom: 3em;
+}
 
+.column-right > *:last-child {
+  margin-bottom: 3em;
 }
 
 h1{
@@ -46,7 +54,7 @@ p{
     font-weight: 400;
     font-style: normal;
     line-height: 1.5;
-    font-size: 2vw;
+    font-size: 1.5vw;
     margin-block-start:0em;
     margin-block-end: 0em;
 }
@@ -63,6 +71,11 @@ p{
   width:30vw;
   height:auto;
 }
+
+.food img:hover{
+  transform: scale(1.1);
+  transition: transform 0.3s ease; 
+}
   
   #shrimp{
     padding: 10px; 
@@ -74,28 +87,52 @@ p{
 
   #home{
     position: fixed;
-    left: 2vw; 
     top: 2vw;
-    height: 5vw;
+    right: 2vw;
+    padding: 1vw;
+    height: 3vw;
     width: auto;
-    transition: transform 0.3s ease;
-  }
-
-  #home-hover{
-    transform: scale(1.2);
   }
 
   a {
     color: rgb(43, 84, 180); 
     text-decoration: wavy underline 0.5px;
   }
+
+
+
+  .entry-footer {
+    max-width: 100%;
+    background-image: url("../imgs/background.jpeg");
+    padding: 3em;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-content img {
+    height: 20vw;
+    width: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .footer-content img:hover {
+    transform: scale(1.1);
+  }
+
   
   @media (max-width: 500px) {
     .two-column {
         grid-template-columns: 1fr;
     }
     .column-left, .column-right {
-        padding: 1.5em;
+        padding: 2.2em;
     }
 
     h1,h3,p{
@@ -109,14 +146,15 @@ p{
         font-size: 7vw;
     }
     p {
-      font-size: 5vw;
+      font-size: 4.7vw;
     }
 
     #home{
       position: fixed;
-      left: 5vw; 
-      top: 5vw;
-      height: 15vw;
+      top: 2vw;
+      right: 2vw;
+      padding: 1vw;
+      height: 8vw;
       width: auto;
     }
     .food img{
@@ -124,4 +162,32 @@ p{
       width:50vw;
       height:auto;
     }
+
+
+    .entry-footer {
+      max-width: 100%;
+      background-image: url("../imgs/background.jpeg");
+      padding: 1em;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    
+    .footer-content img {
+      width: 40vw;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .footer-content img:hover {
+      transform: scale(1.1);
+    }
+  
+
   }
