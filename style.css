@@ -245,7 +245,7 @@ p{
 
 /* MOBILE MOBILE MOBILE MOBILE  */
 
-  @media (max-width: 500px) {
+  @media screen and (max-width: 480px) {
     body{
       background-image: url("imgs/background.jpeg");
       background-size:cover;
@@ -330,7 +330,6 @@ p{
     position: relative;
     justify-content: flex-start;
     align-items: flex-start;
-    width:90%;
     max-width: 100%;
     height: 100%;
 
@@ -349,7 +348,7 @@ p{
 
   /* IPADDDDDDD  */
 
-  @media (max-width: 800px) {
+  @media screen and (min-width: 481px) and (max-width: 767px) {
     body{
       background-image: url("imgs/background.jpeg");
       background-size:cover;
@@ -401,13 +400,13 @@ p{
     
     #basket{
       position: relative;
-      width: 80vw;
+      width: 60vw;
     }
 
     #mouth{
       position: relative;
       top: 30vh;
-      width: 30vw;
+      width: 20vw;
       height:auto;
     }
 
@@ -418,7 +417,7 @@ p{
     }
 
     .food img{
-      width: 35vw;
+      width: 30vw;
       height: auto;
     }
     
@@ -444,7 +443,7 @@ p{
     top: 2vw;
     right: 2vw;
     padding: 1vw;
-    height: 7vw;
+    height: 6vw;
     width: auto;
   }
   }
