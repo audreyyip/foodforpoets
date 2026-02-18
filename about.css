@@ -1,0 +1,300 @@
+/* * {
+    box-sizing: border-box;
+  } */
+
+  body{
+    background-image: url("imgs/background.jpeg");
+    max-width:100%;
+    overflow-x: hidden;  /* Prevents horizontal scroll */
+    width: 100%;
+
+  }
+h1{
+  color: rgb(13, 13, 58);
+  font-family: "Barrio", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 8vw;
+  margin-block-start:0em;
+  margin-block-end: 0em;
+}
+h3{
+  color: rgb(13, 13, 58);
+  font-family: "Josefin Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 3vw;
+}
+p{
+  color: rgb(13, 13, 58);
+  font-family: "Josefin Slab", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2vw;
+  line-height: 1.5;
+  margin-block-start:0em;
+  margin-block-end: 0em;
+}
+
+.heading{
+  width: 50%;
+  height: fit-content;
+  margin: 2vw;
+  /* border: 5px solid violet; */
+}
+
+.food img{
+  width:15vw; 
+  height:auto; 
+  filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5));
+  touch-action: none;  /* Prevents browser touch actions */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.food:hover {
+  cursor: pointer;
+}
+
+
+  #info{
+    position: fixed;
+    pointer-events: auto;
+    bottom: 2vw;
+    left: 2vw;
+    padding: 1vw;
+    height: 3vw;
+    width: 100%;
+    max-width: 100vw;
+    z-index: 9999;
+  }
+
+  .info{
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
+    padding-top: 3vw;
+    padding-left: 3vw;
+    position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100vw;
+    height: 100%;
+  }
+
+#home{
+  position: fixed;
+  top: 2vw;
+  right: 2vw;
+  padding: 1vw;
+  height: 3vw;
+  width: auto;
+  z-index:99
+}
+
+/* MOBILE MOBILE MOBILE MOBILE  */
+
+  @media screen and (max-width: 480px) {
+    body{
+      background-image: url("imgs/background.jpeg");
+      background-size:cover;
+    }
+
+    .wrapper{
+      max-width: 100vw;
+      min-height: 50vh;
+      padding: 2vh;
+    }
+
+    .two-column {
+      display: flex;
+      flex-direction: column;
+  }
+
+    .heading{
+      width: fit-content;
+      height: fit-content;
+      margin-bottom: 1vh;
+    }
+
+    h1{
+      font-size: 15vw;
+    }
+
+    h3{
+        font-weight: 600;
+        font-style: normal;
+        font-optical-sizing: auto;
+        font-size: 8vw;
+    }
+    p{
+        color: rgb(13, 13, 58);
+        font-family: "Josefin Slab", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 6vw;
+        margin-block-start:0em;
+        margin-block-end: 0em;
+    }
+
+    .basket{
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #basket{
+      position: relative;
+      width: 80vw;
+    }
+
+    #mouth{
+      position: relative;
+      top: 30vh;
+      width: 30vw;
+      height:auto;
+    }
+
+    .mouth{
+      display: flex;
+      align-items:flex-end;
+      justify-content:end;
+    }
+
+    .food img{
+      width: 35vw;
+      height: auto;
+    }
+    
+    #info{
+      width: 10vw;
+      height: auto;
+    }
+    .info{
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
+    padding: 5vw;
+    position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 100vw;
+    max-height: 100vw;
+
+  }
+  #home{
+    position: fixed;
+    top: 2vw;
+    right: 2vw;
+    padding: 1vw;
+    height: 8vw;
+    width: auto;
+  }
+  }
+
+
+
+  /* IPADDDDDDD  */
+
+  @media screen and (min-width: 481px) and (max-width: 767px) {
+    body{
+      background-image: url("imgs/background.jpeg");
+      background-size:cover;
+    }
+
+    .wrapper{
+      max-width: 100vw;
+      min-height: 50vh;
+      padding: 2vh;
+    }
+
+    .two-column {
+      display: flex;
+      flex-direction: column;
+  }
+
+    .heading{
+      width: fit-content;
+      height: fit-content;
+      margin-bottom: 1vh;
+    }
+
+    h1{
+      font-size: 10vw;
+    }
+
+    h3{
+        font-weight: 600;
+        font-style: normal;
+        font-optical-sizing: auto;
+        font-size: 5vw;
+    }
+    p{
+        color: rgb(13, 13, 58);
+        font-family: "Josefin Slab", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 4vw;
+        margin-block-start:0em;
+        margin-block-end: 0em;
+    }
+
+    .basket{
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #basket{
+      position: relative;
+      width: 60vw;
+    }
+
+    #mouth{
+      position: relative;
+      top: 30vh;
+      width: 20vw;
+      height:auto;
+    }
+
+    .mouth{
+      display: flex;
+      align-items:flex-end;
+      justify-content:end;
+    }
+
+    .food img{
+      width: 30vw;
+      height: auto;
+    }
+    
+    #info{
+      width: 7vw;
+      height: auto;
+    }
+    .info{
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
+    padding: 5vw;
+    position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width:90%;
+    max-width: 100%;
+    height: 100%;
+
+  }
+  #home{
+    position: fixed;
+    top: 2vw;
+    right: 2vw;
+    padding: 1vw;
+    height: 6vw;
+    width: auto;
+  }
+  }
