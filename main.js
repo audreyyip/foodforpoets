@@ -1,4 +1,7 @@
-
+function aboutPage() {
+    var popup = document.getElementById("aboutPage");
+    popup.classList.toggle("show");
+  }
 
 $(document).ready(function () {
     const draggableIds = ["#sandwich", "#strawberries", "#shrimp", "#chocolatemilk"];
@@ -70,8 +73,6 @@ function enableTouchDrag(element) {
             if (!isDragging) return;
 
             const touch = event.touches[0];
-            const parentRect = element.offsetParent;
-
             const deltaX = Math.abs(touch.clientX - startX);
             const deltaY = Math.abs(touch.clientY - startY);
             if (deltaX > 6 || deltaY > 6) suppressClick = true;

@@ -136,7 +136,8 @@ p{
     left: 2vw;
     padding: 1vw;
     height: 3vw;
-    width: auto;
+    width: 100%;
+    max-width: 100vw;
     z-index: 9999;
   }
 
@@ -149,8 +150,7 @@ p{
     position: relative;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 50%;
-    max-width: 100%;
+    width: 100vw;
     height: 100%;
 
   }
