@@ -145,6 +145,7 @@ p{
   height: auto;
   bottom: 2vw;
   position:fixed;
+  z-index: 100;
 }
 .info{
 display: flex;

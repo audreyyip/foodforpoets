@@ -1,3 +1,6 @@
+const foods = document.querySelectorAll('.food img');
+const basketImg = document.querySelector('#basket');
+
 function aboutPage() {
     var popup = document.getElementById("aboutPage");
     popup.classList.toggle("show");
@@ -51,16 +54,24 @@ function enableTouchDrag(element) {
     let offsetY = 0;
     let suppressClick = false;
 
+
     element.addEventListener(
         "touchstart",
         (event) => {
+            const foodRect = foodImg.getBoundingClientRect();
+            const parentRect = foodImg.offsetParent.getBoundingClientRect();
+            const maxX = basketRect.width - food.offsetWidth;
+            const maxY = basketRect.height - food.offsetHeight;
+                // center of basket
+                const centerX = foodRect / 2;
+                const centerY = foodRect / 2;
             const touch = event.touches[0];
             const rect = element.getBoundingClientRect();
             isDragging = true;
             startX = touch.clientX;
             startY = touch.clientY;
-            offsetX = touch.clientX - (rect.left*0.9);
-            offsetY = touch.clientY - (rect.top*0.9) ;
+            offsetX = touch.clientX - rect.left - centerX;
+            offsetY = touch.clientY - rect.top - centerY;
             suppressClick = false;
         },
         { passive: true }
@@ -99,11 +110,6 @@ function enableTouchDrag(element) {
     });
 }
 
-
-
-// obtained from chatgpt, randomised positioning of food items in the basket
-const foods = document.querySelectorAll('.food img');
-const basketImg = document.querySelector('#basket');
 
 // function centerRandom(min, max) {
 //     return Math.random() * (max - min) + min;
