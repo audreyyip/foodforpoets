@@ -37,9 +37,6 @@ $(document).ready(function () {
     
     });
 });
-
-
-
 function enableTouchDrag(element) {
     if (!element) return;
 
@@ -49,47 +46,83 @@ function enableTouchDrag(element) {
     let offsetX = 0;
     let offsetY = 0;
     let suppressClick = false;
+    let initialLeft = 0;
+    let initialTop = 0;
 
     element.addEventListener(
         "touchstart",
         (event) => {
+            event.preventDefault(); // Prevent page scroll while dragging
             const touch = event.touches[0];
             const rect = element.getBoundingClientRect();
 
             isDragging = true;
             startX = touch.clientX;
             startY = touch.clientY;
+            
+            // Store the current position
+            const computedStyle = window.getComputedStyle(element);
+            initialLeft = parseFloat(computedStyle.left) || 0;
+            initialTop = parseFloat(computedStyle.top) || 0;
+            
+            // Calculate offset from touch point to element's top-left corner
             offsetX = touch.clientX - rect.left;
             offsetY = touch.clientY - rect.top;
+            
             suppressClick = false;
+            
+            // Ensure element has absolute positioning
+            element.style.position = 'absolute';
+            element.style.zIndex = '1000';
         },
-        { passive: true }
+        { passive: false }
     );
 
     element.addEventListener(
         "touchmove",
         (event) => {
             if (!isDragging) return;
+            event.preventDefault(); // Prevent page scroll
 
             const touch = event.touches[0];
-            const parentRect = element.offsetParent;
+            
+            // Calculate new position relative to viewport
+            let newLeft = touch.clientX - offsetX;
+            let newTop = touch.clientY - offsetY;
 
+            // Constrain to window boundaries (optional)
+            const elementWidth = element.offsetWidth;
+            const elementHeight = element.offsetHeight;
+            
+            newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - elementWidth));
+            newTop = Math.max(0, Math.min(newTop, window.innerHeight - elementHeight));
+
+            // Apply position
+            element.style.left = newLeft + 'px';
+            element.style.top = newTop + 'px';
+
+            // Track movement for click suppression
             const deltaX = Math.abs(touch.clientX - startX);
             const deltaY = Math.abs(touch.clientY - startY);
             if (deltaX > 6 || deltaY > 6) suppressClick = true;
-
-            element.style.left = touch.clientX - offsetX + parentRect.scrollLeft + "px";
-            element.style.top = touch.clientY - offsetY + parentRect.scrollTop + "px";
-
-            // event.preventDefault();
         },
         { passive: false }
     );
 
-    ["touchend", "touchcancel"].forEach((eventName) => {
-        element.addEventListener(eventName, () => {
+    element.addEventListener("touchend", (event) => {
+        if (isDragging) {
             isDragging = false;
-        });
+            
+            // Check if dropped on mouth
+            const mouth = document.querySelector("#mouth");
+            if (mouth && isOverlapping(element, mouth)) {
+                element.classList.add("eaten");
+            }
+        }
+    });
+
+    element.addEventListener("touchcancel", () => {
+        isDragging = false;
     });
 
     element.addEventListener("click", (event) => {
@@ -100,6 +133,68 @@ function enableTouchDrag(element) {
         }
     });
 }
+
+
+// function enableTouchDrag(element) {
+//     if (!element) return;
+
+//     let isDragging = false;
+//     let startX = 0;
+//     let startY = 0;
+//     let offsetX = 0;
+//     let offsetY = 0;
+//     let suppressClick = false;
+
+//     element.addEventListener(
+//         "touchstart",
+//         (event) => {
+//             const touch = event.touches[0];
+//             const rect = element.getBoundingClientRect();
+
+//             isDragging = true;
+//             startX = touch.clientX;
+//             startY = touch.clientY;
+//             offsetX = touch.clientX - rect.left;
+//             offsetY = touch.clientY - rect.top;
+//             suppressClick = false;
+//         },
+//         { passive: true }
+//     );
+
+//     element.addEventListener(
+//         "touchmove",
+//         (event) => {
+//             if (!isDragging) return;
+
+//             const touch = event.touches[0];
+//             const parentRect = element.offsetParent;
+
+//             const deltaX = Math.abs(touch.clientX - startX);
+//             const deltaY = Math.abs(touch.clientY - startY);
+//             if (deltaX > 6 || deltaY > 6) suppressClick = true;
+
+//             element.style.left = touch.clientX - offsetX + parentRect.scrollLeft + "px";
+//             element.style.top = touch.clientY - offsetY + parentRect.scrollTop + "px";
+
+//             // event.preventDefault();
+//         },
+//         { passive: false }
+//     );
+
+//     ["touchend", "touchcancel"].forEach((eventName) => {
+//         element.addEventListener(eventName, () => {
+//             isDragging = false;
+//         });
+//     });
+
+//     element.addEventListener("click", (event) => {
+//         if (suppressClick) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//             suppressClick = false;
+//         }
+//     });
+// }
 
 
 
@@ -140,33 +235,33 @@ window.addEventListener('load', () => {
 });
 
 
-// MOUTH DRAGGING
+// // MOUTH DRAGGING
 
-function isOverlapping(el1, el2) {
+// function isOverlapping(el1, el2) {
 
-    const r1 = el1.getBoundingClientRect();
-    const r2 = el2.getBoundingClientRect();
+//     const r1 = el1.getBoundingClientRect();
+//     const r2 = el2.getBoundingClientRect();
 
-    return !(
-        r1.right < r2.left ||
-        r1.left > r2.right ||
-        r1.bottom < r2.top ||
-        r1.top > r2.bottom
-    );
-}
+//     return !(
+//         r1.right < r2.left ||
+//         r1.left > r2.right ||
+//         r1.bottom < r2.top ||
+//         r1.top > r2.bottom
+//     );
+// }
 
 
-["touchend", "touchcancel"].forEach((eventName) => {
-    element.addEventListener(eventName, () => {
-        isDragging = false;
+// ["touchend", "touchcancel"].forEach((eventName) => {
+//     element.addEventListener(eventName, () => {
+//         isDragging = false;
 
-        const mouth = document.querySelector("#mouth");
+//         const mouth = document.querySelector("#mouth");
 
-        if (isOverlapping(element, mouth)) {
-            element.classList.add("eaten");
-        }
-    });
-});
+//         if (isOverlapping(element, mouth)) {
+//             element.classList.add("eaten");
+//         }
+//     });
+// });
 
 
 // $(document).ready(function() {
