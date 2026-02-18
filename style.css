@@ -97,9 +97,6 @@ p{
   width:15vw; 
   height:auto; 
   filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5));
-  touch-action: none; /* Prevents browser from handling touch events */
-  -webkit-user-select: none;
-  user-select: none;
 }
 
 .food:hover {

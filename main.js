@@ -41,99 +41,65 @@ function enableTouchDrag(element) {
     if (!element) return;
 
     let isDragging = false;
-    let startX = 0;
-    let startY = 0;
     let offsetX = 0;
     let offsetY = 0;
-    let suppressClick = false;
-    let initialLeft = 0;
-    let initialTop = 0;
+    let initialRect = null;
 
-    element.addEventListener(
-        "touchstart",
-        (event) => {
-            event.preventDefault(); // Prevent page scroll while dragging
-            const touch = event.touches[0];
-            const rect = element.getBoundingClientRect();
+    element.addEventListener("touchstart", (event) => {
+        event.preventDefault();
+        const touch = event.touches[0];
+        
+        initialRect = element.getBoundingClientRect();
+        
+        // Log values to debug
+        console.log('Touch start:', {
+            touchX: touch.clientX,
+            touchY: touch.clientY,
+            elementLeft: initialRect.left,
+            elementTop: initialRect.top,
+            elementWidth: initialRect.width,
+            elementHeight: initialRect.height
+        });
+        
+        offsetX = touch.clientX - initialRect.left;
+        offsetY = touch.clientY - initialRect.top;
+        
+        console.log('Offset:', { offsetX, offsetY });
+        
+        element.style.position = 'fixed';
+        element.style.left = initialRect.left + 'px';
+        element.style.top = initialRect.top + 'px';
+        element.style.zIndex = '1000';
+        element.style.margin = '0';
+        
+        isDragging = true;
+    }, { passive: false });
 
-            isDragging = true;
-            startX = touch.clientX;
-            startY = touch.clientY;
-            
-            // Store the current position
-            const computedStyle = window.getComputedStyle(element);
-            initialLeft = parseFloat(computedStyle.left) || 0;
-            initialTop = parseFloat(computedStyle.top) || 0;
-            
-            // Calculate offset from touch point to element's top-left corner
-            offsetX = touch.clientX - rect.left;
-            offsetY = touch.clientY - rect.top;
-            
-            suppressClick = false;
-            
-            // Ensure element has absolute positioning
-            element.style.position = 'absolute';
-            element.style.zIndex = '1000';
-        },
-        { passive: false }
-    );
+    element.addEventListener("touchmove", (event) => {
+        if (!isDragging) return;
+        event.preventDefault();
 
-    element.addEventListener(
-        "touchmove",
-        (event) => {
-            if (!isDragging) return;
-            event.preventDefault(); // Prevent page scroll
+        const touch = event.touches[0];
+        
+        let newLeft = touch.clientX - offsetX;
+        let newTop = touch.clientY - offsetY;
+        
+        // Log position during drag
+        console.log('Dragging:', {
+            touchX: touch.clientX,
+            touchY: touch.clientY,
+            newLeft,
+            newTop
+        });
+        
+        element.style.left = newLeft + 'px';
+        element.style.top = newTop + 'px';
+    }, { passive: false });
 
-            const touch = event.touches[0];
-            
-            // Calculate new position relative to viewport
-            let newLeft = touch.clientX - offsetX;
-            let newTop = touch.clientY - offsetY;
-
-            // Constrain to window boundaries (optional)
-            const elementWidth = element.offsetWidth;
-            const elementHeight = element.offsetHeight;
-            
-            newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - elementWidth));
-            newTop = Math.max(0, Math.min(newTop, window.innerHeight - elementHeight));
-
-            // Apply position
-            element.style.left = newLeft + 'px';
-            element.style.top = newTop + 'px';
-
-            // Track movement for click suppression
-            const deltaX = Math.abs(touch.clientX - startX);
-            const deltaY = Math.abs(touch.clientY - startY);
-            if (deltaX > 6 || deltaY > 6) suppressClick = true;
-        },
-        { passive: false }
-    );
-
-    element.addEventListener("touchend", (event) => {
-        if (isDragging) {
-            isDragging = false;
-            
-            // Check if dropped on mouth
-            const mouth = document.querySelector("#mouth");
-            if (mouth && isOverlapping(element, mouth)) {
-                element.classList.add("eaten");
-            }
-        }
-    });
-
-    element.addEventListener("touchcancel", () => {
+    element.addEventListener("touchend", () => {
         isDragging = false;
     });
-
-    element.addEventListener("click", (event) => {
-        if (suppressClick) {
-            event.preventDefault();
-            event.stopPropagation();
-            suppressClick = false;
-        }
-    });
 }
-
 
 // function enableTouchDrag(element) {
 //     if (!element) return;
