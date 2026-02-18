@@ -56,12 +56,11 @@ function enableTouchDrag(element) {
         (event) => {
             const touch = event.touches[0];
             const rect = element.getBoundingClientRect();
-
             isDragging = true;
             startX = touch.clientX;
             startY = touch.clientY;
-            offsetX = touch.clientX - rect.left;
-            offsetY = touch.clientY - rect.top;
+            offsetX = touch.clientX - (rect.left*0.9);
+            offsetY = touch.clientY - (rect.top*0.9) ;
             suppressClick = false;
         },
         { passive: true }
