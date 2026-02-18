@@ -140,7 +140,24 @@ p{
     opacity: 0.5;
 }
 
+#info{
+  width: 10vw;
+  height: auto;
+  bottom: 2vw;
+  position:fixed;
+}
+.info{
+display: flex;
+text-decoration: none;
+flex-direction: column;
+padding: 5vw;
+position: relative;
+justify-content: flex-start;
+align-items: flex-start;
+max-width: 100vw;
+max-height: 100vw;
 
+}
   .mouth-active {
       filter: brightness(1.2);
   }
@@ -279,6 +296,8 @@ p{
     #info{
       width: 10vw;
       height: auto;
+      bottom: 2vw;
+      position:fixed;
     }
     .info{
     display: flex;
