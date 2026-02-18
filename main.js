@@ -42,147 +42,62 @@ function enableTouchDrag(element) {
     if (!element) return;
 
     let isDragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
     let startX = 0;
     let startY = 0;
-    let initialRect = null;
-    let basketRect = null;
+    let offsetX = 0;
+    let offsetY = 0;
+    let suppressClick = false;
 
-    element.addEventListener("touchstart", (event) => {
-        event.preventDefault();
-        const touch = event.touches[0];
-        
-        // Get the basket element (the positioned container)
-        const basket = document.querySelector('.basket');
-        basketRect = basket.getBoundingClientRect();
-        
-        // Get the element's position relative to the viewport
-        initialRect = element.getBoundingClientRect();
-        
-        // Calculate offset from touch point to element's top-left corner
-        offsetX = touch.clientX - initialRect.left;
-        offsetY = touch.clientY - initialRect.top;
-        
-        // Store start position for click detection
-        startX = touch.clientX;
-        startY = touch.clientY;
-        
-        // Temporarily switch to fixed positioning during drag
-        element.style.position = 'fixed';
-        element.style.left = initialRect.left + 'px';
-        element.style.top = initialRect.top + 'px';
-        element.style.zIndex = '1000';
-        element.style.margin = '0';
-        
-        isDragging = true;
-    }, { passive: false });
+    element.addEventListener(
+        "touchstart",
+        (event) => {
+            const touch = event.touches[0];
+            const rect = element.getBoundingClientRect();
 
-    element.addEventListener("touchmove", (event) => {
-        if (!isDragging) return;
-        event.preventDefault();
+            isDragging = true;
+            startX = touch.clientX;
+            startY = touch.clientY;
+            offsetX = touch.clientX - rect.left;
+            offsetY = touch.clientY - rect.top;
+            suppressClick = false;
+        },
+        { passive: true }
+    );
 
-        const touch = event.touches[0];
-        
-        // Calculate new position relative to viewport
-        let newLeft = touch.clientX - offsetX;
-        let newTop = touch.clientY - offsetY;
-        
-        // Apply new position
-        element.style.left = newLeft + 'px';
-        element.style.top = newTop + 'px';
-        
-    }, { passive: false });
+    element.addEventListener(
+        "touchmove",
+        (event) => {
+            if (!isDragging) return;
 
-    element.addEventListener("touchend", (event) => {
-        if (isDragging) {
+            const touch = event.touches[0];
+            const parentRect = element.offsetParent;
+
+            const deltaX = Math.abs(touch.clientX - startX);
+            const deltaY = Math.abs(touch.clientY - startY);
+            if (deltaX > 6 || deltaY > 6) suppressClick = true;
+
+            element.style.left = touch.clientX - offsetX  + "px";
+            element.style.top = touch.clientY - offsetY + "px";
+//+ parentRect.scrollLeft + parentRect.scrollTop 
+            // event.preventDefault();
+        },
+        { passive: false }
+    );
+
+    ["touchend", "touchcancel"].forEach((eventName) => {
+        element.addEventListener(eventName, () => {
             isDragging = false;
-            
-            // Get final position
-            const finalRect = element.getBoundingClientRect();
-            
-            // Check if dropped on mouth
-            const mouth = document.querySelector("#mouth");
-            if (mouth && isOverlapping(element, mouth)) {
-                element.classList.add("eaten");
-            } else {
-                // If not eaten, return to basket with proper absolute positioning
-                const basket = document.querySelector('.basket');
-                const newBasketRect = basket.getBoundingClientRect();
-                
-                // Convert viewport coordinates back to absolute coordinates relative to basket
-                element.style.position = 'absolute';
-                element.style.left = (finalRect.left - newBasketRect.left) + 'px';
-                element.style.top = (finalRect.top - newBasketRect.top) + 'px';
-            }
+        });
+    });
+
+    element.addEventListener("click", (event) => {
+        if (suppressClick) {
+            event.preventDefault();
+            event.stopPropagation();
+            suppressClick = false;
         }
     });
-
-    element.addEventListener("touchcancel", () => {
-        isDragging = false;
-    });
 }
-
-// function enableTouchDrag(element) {
-//     if (!element) return;
-
-//     let isDragging = false;
-//     let startX = 0;
-//     let startY = 0;
-//     let offsetX = 0;
-//     let offsetY = 0;
-//     let suppressClick = false;
-
-//     element.addEventListener(
-//         "touchstart",
-//         (event) => {
-//             const touch = event.touches[0];
-//             const rect = element.getBoundingClientRect();
-
-//             isDragging = true;
-//             startX = touch.clientX;
-//             startY = touch.clientY;
-//             offsetX = touch.clientX - rect.left;
-//             offsetY = touch.clientY - rect.top;
-//             suppressClick = false;
-//         },
-//         { passive: true }
-//     );
-
-//     element.addEventListener(
-//         "touchmove",
-//         (event) => {
-//             if (!isDragging) return;
-
-//             const touch = event.touches[0];
-//             const parentRect = element.offsetParent;
-
-//             const deltaX = Math.abs(touch.clientX - startX);
-//             const deltaY = Math.abs(touch.clientY - startY);
-//             if (deltaX > 6 || deltaY > 6) suppressClick = true;
-
-//             element.style.left = touch.clientX - offsetX + parentRect.scrollLeft + "px";
-//             element.style.top = touch.clientY - offsetY + parentRect.scrollTop + "px";
-
-//             // event.preventDefault();
-//         },
-//         { passive: false }
-//     );
-
-//     ["touchend", "touchcancel"].forEach((eventName) => {
-//         element.addEventListener(eventName, () => {
-//             isDragging = false;
-//         });
-//     });
-
-//     element.addEventListener("click", (event) => {
-//         if (suppressClick) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             suppressClick = false;
-//         }
-//     });
-// }
 
 
 
@@ -225,31 +140,31 @@ window.addEventListener('load', () => {
 
 // // MOUTH DRAGGING
 
-// function isOverlapping(el1, el2) {
+function isOverlapping(el1, el2) {
 
-//     const r1 = el1.getBoundingClientRect();
-//     const r2 = el2.getBoundingClientRect();
+    const r1 = el1.getBoundingClientRect();
+    const r2 = el2.getBoundingClientRect();
 
-//     return !(
-//         r1.right < r2.left ||
-//         r1.left > r2.right ||
-//         r1.bottom < r2.top ||
-//         r1.top > r2.bottom
-//     );
-// }
+    return !(
+        r1.right < r2.left ||
+        r1.left > r2.right ||
+        r1.bottom < r2.top ||
+        r1.top > r2.bottom
+    );
+}
 
 
-// ["touchend", "touchcancel"].forEach((eventName) => {
-//     element.addEventListener(eventName, () => {
-//         isDragging = false;
+["touchend", "touchcancel"].forEach((eventName) => {
+    element.addEventListener(eventName, () => {
+        isDragging = false;
 
-//         const mouth = document.querySelector("#mouth");
+        const mouth = document.querySelector("#mouth");
 
-//         if (isOverlapping(element, mouth)) {
-//             element.classList.add("eaten");
-//         }
-//     });
-// });
+        if (isOverlapping(element, mouth)) {
+            element.classList.add("eaten");
+        }
+    });
+});
 
 
 // $(document).ready(function() {
