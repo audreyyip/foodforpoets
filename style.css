@@ -129,31 +129,6 @@ p{
   }
 
 
-  #info{
-    position: fixed;
-    pointer-events: auto;
-    bottom: 2vw;
-    left: 2vw;
-    padding: 1vw;
-    height: 3vw;
-    width: 100%;
-    max-width: 100vw;
-    z-index: 9999;
-  }
-
-  .info{
-    display: flex;
-    text-decoration: none;
-    flex-direction: column;
-    padding-top: 3vw;
-    padding-left: 3vw;
-    position: relative;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100vw;
-    height: 100%;
-
-  }
   .mouth{
     display: flex;
     align-items: flex-end;
@@ -225,14 +200,6 @@ p{
 .close:focus {
     color: #000;
 }
-
-.about{
-  text-decoration:none;
-  text-decoration:underline wavy; 
-  top: 50vh; 
-  text-align: center;
-}
-
 #home{
   position: fixed;
   top: 2vw;
