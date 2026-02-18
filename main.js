@@ -58,25 +58,27 @@ function enableTouchDrag(element) {
     element.addEventListener(
         "touchstart",
         (event) => {
-            const foodRect = foodImg.getBoundingClientRect();
-            const parentRect = foodImg.offsetParent.getBoundingClientRect();
-            const maxX = basketRect.width - food.offsetWidth;
-            const maxY = basketRect.height - food.offsetHeight;
-                // center of basket
-                const centerX = foodRect / 2;
-                const centerY = foodRect / 2;
             const touch = event.touches[0];
-            const rect = element.getBoundingClientRect();
-            isDragging = true;
+            const rect = element.getBoundingClientRect();  // Food position
+            
+            // Calculate the CENTER of the food element
+            const centerX = rect.left + (rect.width / 2);
+            const centerY = rect.top + (rect.height / 2);
+            
+            // Calculate offset from touch point to center
+            offsetX = touch.clientX - centerX;
+            offsetY = touch.clientY - centerY;
+            
+            // Store start position
             startX = touch.clientX;
             startY = touch.clientY;
-            offsetX = touch.clientX - rect.left - centerX;
-            offsetY = touch.clientY - rect.top - centerY;
+            
+            isDragging = true;
             suppressClick = false;
         },
-        { passive: true }
+        { passive: false }  // Need passive:false to use preventDefault()
     );
-
+    
     element.addEventListener(
         "touchmove",
         (event) => {
