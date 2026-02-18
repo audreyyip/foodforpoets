@@ -50,7 +50,7 @@ h1{
   font-family: "Barrio", system-ui;
   font-weight: 400;
   font-style: normal;
-  font-size: 8vw;
+  font-size: 6em;
   margin-block-start:0em;
   margin-block-end: 0em;
 }
@@ -60,14 +60,15 @@ h3{
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
-  font-size: 3vw;
+  font-size: 2em;
+  line-height: 1.5;
 }
 p{
   color: rgb(13, 13, 58);
   font-family: "Josefin Slab", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 2vw;
+  font-size: 1.5em;
   line-height: 1.5;
   margin-block-start:0em;
   margin-block-end: 0em;
@@ -235,24 +236,14 @@ p{
       margin-bottom: 1vh;
     }
 
-    h1{
-      font-size: 15vw;
+    h1 {
+      font-size: 3em;
+  }
+    h3 {
+        font-size: 1.8em;
     }
-
-    h3{
-        font-weight: 600;
-        font-style: normal;
-        font-optical-sizing: auto;
-        font-size: 8vw;
-    }
-    p{
-        color: rgb(13, 13, 58);
-        font-family: "Josefin Slab", serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 6vw;
-        margin-block-start:0em;
-        margin-block-end: 0em;
+    p {
+      font-size: 1.2em;
     }
 
     .basket{
@@ -315,7 +306,7 @@ p{
 
   /* IPADDDDDDD  */
 
-  @media screen and (min-width: 481px) and (max-width: 767px) {
+  @media screen and (min-width: 481px) and (max-width: 800px) {
     body{
       background-image: url("imgs/background.jpeg");
       background-size:cover;
@@ -338,24 +329,14 @@ p{
       margin-bottom: 1vh;
     }
 
-    h1{
-      font-size: 10vw;
+    h1 {
+      font-size: 7em;
+  }
+    h3 {
+      font-size: 2em;
     }
-
-    h3{
-        font-weight: 600;
-        font-style: normal;
-        font-optical-sizing: auto;
-        font-size: 5vw;
-    }
-    p{
-        color: rgb(13, 13, 58);
-        font-family: "Josefin Slab", serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 4vw;
-        margin-block-start:0em;
-        margin-block-end: 0em;
+    p {
+      font-size: 1.5em;
     }
 
     .basket{
@@ -389,6 +370,8 @@ p{
     }
     
     #info{
+      bottom: 2vw;
+      position:fixed;
       width: 7vw;
       height: auto;
     }
@@ -400,7 +383,6 @@ p{
     position: relative;
     justify-content: flex-start;
     align-items: flex-start;
-    width:90%;
     max-width: 100%;
     height: 100%;
 
