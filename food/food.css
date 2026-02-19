@@ -11,12 +11,10 @@ body{
 .column-left{
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     padding-top: 10vh;
     padding-bottom: 10vh;
     background-image: url("../imgs/background.jpeg");
-    text-align: center;
-    
 
 }
 .column-right{
@@ -65,9 +63,12 @@ p{
   margin-bottom: 5em;
 } */
 
+.column-left :only-child{
+  position: sticky;
+  top: 40px;
+}
 .food img{
   position: sticky;
-  top: 5vh;
   width:30vw;
   height:auto;
 }

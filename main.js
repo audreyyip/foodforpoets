@@ -48,74 +48,57 @@ function enableTouchDrag(element) {
     if (!element) return;
 
     let isDragging = false;
-    let startX = 0;
-    let startY = 0;
     let offsetX = 0;
     let offsetY = 0;
-    let suppressClick = false;
 
+    element.addEventListener("touchstart", (event) => {
+        const touch = event.touches[0];
+        const rect = element.getBoundingClientRect();
 
-    element.addEventListener(
-        "touchstart",
-        (event) => {
-            const touch = event.touches[0];
-            const rect = element.getBoundingClientRect();  // Food position
-            
-            // Calculate the CENTER of the food element
-            const centerX = rect.left + (rect.width / 2);
-            const centerY = rect.top + (rect.height / 2);
-            
-            // Calculate offset from touch point to center
-            offsetX = touch.clientX - centerX;
-            offsetY = touch.clientY - centerY;
-            
-            // Store start position
-            startX = touch.clientX;
-            startY = touch.clientY;
-            
-            isDragging = true;
-            suppressClick = false;
-        },
-        { passive: false }  // Need passive:false to use preventDefault()
-    );
-    
-    element.addEventListener(
-        "touchmove",
-        (event) => {
-            if (!isDragging) return;
+        isDragging = true;
+        // This keeps the "grab point" exactly where you touched the image
+        offsetX = touch.clientX - rect.left;
+        offsetY = touch.clientY - rect.top;
+    }, { passive: true });
 
-            const touch = event.touches[0];
-            const deltaX = Math.abs(touch.clientX - startX);
-            const deltaY = Math.abs(touch.clientY - startY);
-            if (deltaX > 6 || deltaY > 6) suppressClick = true;
+    element.addEventListener("touchmove", (event) => {
+        if (!isDragging) return;
 
-            element.style.left = touch.clientX - offsetX  + "px";
-            element.style.top = touch.clientY - offsetY + "px";
-//+ parentRect.scrollLeft + parentRect.scrollTop 
-            // event.preventDefault();
-        },
-        { passive: false }
-    );
+        const touch = event.touches[0];
+        const parentRect = element.offsetParent.getBoundingClientRect();
+
+        // clientX/Y is relative to the viewport
+        // parentRect.left/top is the container's distance from viewport
+        // offsetX/Y is the distance from the finger to the image's top-left
+        const x = touch.clientX - parentRect.left - offsetX;
+        const y = touch.clientY - parentRect.top - offsetY;
+
+        element.style.left = `${x}px`;
+        element.style.top = `${y}px`;
+
+        event.preventDefault(); // Prevent scrolling while dragging
+    }, { passive: false });
 
     ["touchend", "touchcancel"].forEach((eventName) => {
         element.addEventListener(eventName, () => {
             isDragging = false;
+            // Check for overlap with mouth here
+            const mouth = document.querySelector("#mouth");
+            if (isOverlapping(element, mouth)) {
+                element.classList.add("eaten");
+            }
         });
-    });
-
-    element.addEventListener("click", (event) => {
-        if (suppressClick) {
-            event.preventDefault();
-            event.stopPropagation();
-            suppressClick = false;
-        }
     });
 }
 
 
-// function centerRandom(min, max) {
-//     return Math.random() * (max - min) + min;
-// }
+
+
+
+
+function centerRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 window.addEventListener('load', () => {
 
