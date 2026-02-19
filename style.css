@@ -13,6 +13,7 @@ body{
     width: 100%;
     display: flex;
     flex-direction: row;
+    gap: 5vw;
 }
 
 .wrapper{
@@ -66,9 +67,9 @@ h3{
 p{
   color: rgb(13, 13, 58);
   font-family: "Josefin Slab", serif;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
-  font-size: 1.5em;
+  font-size: 1.3em;
   line-height: 1.5;
   margin-block-start:0em;
   margin-block-end: 0em;
@@ -89,7 +90,7 @@ p{
 }
 
 .heading{
-  width: 50%;
+  width: 40%;
   height: fit-content;
   margin: 2vw;
   /* border: 5px solid violet; */
@@ -139,6 +140,7 @@ p{
   .dragging {
     opacity: 0.5;
 }
+
 
 #info{
   width: 4vw;
