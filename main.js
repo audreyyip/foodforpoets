@@ -7,7 +7,7 @@ function aboutPage() {
   }
 
 $(document).ready(function () {
-    const draggableIds = ["#sandwich", "#strawberries", "#shrimp", "#chocolatemilk", "#egg", "#salad", "#salad"];
+    const draggableIds = ["#sandwich", "#strawberries", "#shrimp", "#chocolatemilk", "#egg", "#salad"];
     // Get the element with the id "myElement"
 
     draggableIds.forEach((id) => {
