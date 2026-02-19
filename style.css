@@ -130,6 +130,13 @@ p{
     transition: transform 1s ease;
   }
 
+  #egg{
+    rotate: 10deg;
+  }
+
+  #salad{
+    rotate: -10deg;
+  }
 
   .mouth{
     display: flex;
