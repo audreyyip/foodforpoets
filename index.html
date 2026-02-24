@@ -15,9 +15,36 @@
 
 </head>
 <body>
-        <a href="about.html">
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Preparing the feast...</p>
+      </div>
+
+        <!-- <a href="about.html">
             <img id="info" src="imgs/info.png">
-        </a>
+        </a> -->
+
+
+        <button id="info-btn">
+            <img src="imgs/info.png" alt="About">
+          </button>
+          
+          <div id="overlay"></div>
+          
+          <div id="info-modal">
+            <button id="close-btn" aria-label="Close Modal">
+                <img src="imgs/close.png" alt="Close">
+            </button>
+            <div class="info-content">
+              <h2>Why Food for Poets?</h2>
+              <h3>Why not food for me? :(</h3>
+              <p>This site allows you to explore each poem like you would try different dishes. The hyperlinks connect to ingredients, words, or ideas mentioned in other poems. Click and see where you go!</p>
+            </div>
+          </div>
+
+
+
 <div class="wrapper">
 
     <div class="two-column">

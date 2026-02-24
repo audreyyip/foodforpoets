@@ -55,6 +55,17 @@ h1{
   margin-block-start:0em;
   margin-block-end: 0em;
 }
+
+h2{
+  color: rgb(13, 13, 58);
+  font-family: "Barrio", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4em;
+  margin-block-start:0em;
+  margin-block-end: 0em;
+}
+
 h3{
   color: rgb(13, 13, 58);
   font-family: "Josefin Slab", serif;
@@ -148,14 +159,94 @@ p{
     opacity: 0.5;
 }
 
-
-#info{
-  width: 4vw;
-  height: auto;
+/* 1. The Button - using the ID from your HTML */
+#info-btn {
+  position: fixed;
   bottom: 2vw;
-  position:fixed;
-  z-index: 100;
+  left: 2vw;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 100; /* Stays above the main content */
 }
+
+#info-btn img {
+  width: 4vw; /* Scales with screen */
+  height: auto;
+  display: block;
+}
+
+/* 2. The Overlay (Background Dimmer) */
+#overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000; /* Must be higher than #info-btn */
+}
+
+/* 3. The Modal Box */
+#info-modal {
+  display: none; /* Hidden by default */
+  display: block; /* Always 'block' now because we use transform to hide it */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 350px;    /* Give it a fixed width or percentage */
+  max-width: 80vw;
+  height: 100vh;   /* Full height for a side-panel feel */
+  background: white;
+  padding: 40px;
+  z-index: 1001;
+  box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+  /* THE SLIDE LOGIC */
+  transform: translateX(-100%); /* Moves it completely off-screen to the left */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth "out-to-in" movement */
+}
+
+
+/* When the .open class is added via JS */
+#info-modal.open {
+  transform: translateX(0); /* Slides back to the edge of the screen */
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 1000;
+}
+
+#overlay.open {
+  display: block;
+}
+
+#close-btn {
+  /* Positioning */
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  
+  /* Resetting default button styles */
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#close-btn img{
+  width: 3vw;
+  height: auto;
+}
+
+/* Hover state for better UX */
+#close-btn:hover {
+  transform: scale(1.2); /* Slight grow effect */
+  transition: transform 0.3s ease;
+}
+
 .info{
 display: flex;
 text-decoration: none;
@@ -172,32 +263,6 @@ max-height: 100vw;
       filter: brightness(1.2);
   }
     
-  /* The modal background */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
-}
-
-
-/* Modal content box */
-.modal-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 500px;
-    position: relative;
-    animation: slideDown 0.3s ease;
-}
-
 .eaten {
   opacity:0;
   transition: opacity 0.5s ease;
@@ -215,10 +280,11 @@ max-height: 100vw;
     }
 }
 
-/* The close button */
+/* The close button
 .close {
-    color: #aaa;
     float: right;
+    top: 2vw;
+    right: 2vw;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
@@ -227,7 +293,9 @@ max-height: 100vw;
 .close:hover,
 .close:focus {
     color: #000;
-}
+} */
+
+
 #home{
   position: fixed;
   top: 2vw;
@@ -237,6 +305,44 @@ max-height: 100vw;
   width: auto;
   z-index:99
 }
+
+
+#loader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #DCE8F7; /* Match your site background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Higher than everything else */
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* The spinning element */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(13, 13, 58, 0.1);
+  border-top: 5px solid rgb(13, 13, 58); /* Your heading color*/
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Class to hide the loader */
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
 
 /* MOBILE MOBILE MOBILE MOBILE  */
 
@@ -303,12 +409,15 @@ max-height: 100vw;
       height: auto;
     }
     
-    #info{
+    #close-btn img{
       width: 10vw;
       height: auto;
-      bottom: 2vw;
-      position:fixed;
     }
+
+    #info-btn img {
+      width: 12vw; /* Larger for thumbs on mobile */
+    }
+    
     .info{
     display: flex;
     text-decoration: none;
@@ -397,13 +506,17 @@ max-height: 100vw;
       width: 30vw;
       height: auto;
     }
-    
-    #info{
-      bottom: 2vw;
-      position:fixed;
+  
+
+    #close-btn img{
       width: 7vw;
       height: auto;
     }
+
+    #info-btn img {
+      width: 10vw; /* Larger for thumbs on mobile */
+    }
+
     .info{
     display: flex;
     text-decoration: none;

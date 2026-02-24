@@ -57,27 +57,69 @@ p{
   cursor: pointer;
 }
 
+/* About Button */
+/* Ensure the button image stays contained */
+#info-btn img {
+  width: 4vw;
+  min-width: 40px; /* Prevents it from getting too tiny on mobile */
+  height: auto;
+  display: block;
+}
 
-  #info{
-    position: fixed;
-    pointer-events: auto;
-    bottom: 2vw;
-    left: 2vw;
-    padding: 1vw;
-    height: 3vw;
-    z-index: 9999;
-  }
+/* The dark background behind the modal */
+#overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7); /* Darker for better focus */
+  z-index: 200;
+}
 
+/* The actual Modal Box */
+#info-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  left: 50%;
+  top: 50%; /* Switched from bottom to top for easier math */
+  transform: translate(-50%, -50%); /* The magic centering line */
+  
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 300;
+  width: 80%;
+  max-width: 500px;
+}
+
+/* When JS adds the .open class */
+#overlay.open,
+#info-modal.open {
+  display: block;
+}
+
+/* Close button positioning inside the modal */
+#close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #333;
+}
   .info{
-    display: flex;
-    text-decoration: none;
-    flex-direction: column;
-    padding-top: 3vw;
-    padding-left: 3vw;
-    position: relative;
-    justify-content: flex-start;
-    align-items: flex-start;
-    max-width: 100vw;
+  display: flex;
+  text-decoration: none;
+  flex-direction: column;
+  padding-top: 3vw;
+  padding-left: 3vw;
+  position: relative;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 100vw;
   }
 
 #home{

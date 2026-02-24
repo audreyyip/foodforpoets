@@ -1,3 +1,16 @@
+window.addEventListener("load", () => {
+    const loader = document.querySelector("#loader");
+    
+    // Add the hidden class
+    loader.classList.add("loader-hidden");
+    
+    // Optional: Remove it from the DOM entirely after the fade out
+    loader.addEventListener("transitionend", () => {
+      loader.remove();
+    });
+  });
+
+  
 const foods = document.querySelectorAll('.food img');
 const basketImg = document.querySelector('#basket');
 
@@ -34,13 +47,6 @@ $(document).ready(function () {
             $(ui.draggable).addClass("eaten");
     
         }
-    // });
-    // $("#mouth").click(function() {
-
-    //     $(".food").addClass("eaten");   // hides all food at once
-    
-    //     $(this).css("transform", "scale(2)");
-    
     });
 });
 
@@ -79,16 +85,16 @@ function enableTouchDrag(element) {
         event.preventDefault(); // Prevent scrolling while dragging
     }, { passive: false });
 
-    ["touchend", "touchcancel"].forEach((eventName) => {
-        element.addEventListener(eventName, () => {
-            isDragging = false;
-            // Check for overlap with mouth here
-            const mouth = document.querySelector("#mouth");
-            if (isOverlapping(element, mouth)) {
-                element.classList.add("eaten");
-            }
-        });
-    });
+    // ["touchend", "touchcancel"].forEach((eventName) => {
+    //     element.addEventListener(eventName, () => {
+    //         isDragging = false;
+    //         // Check for overlap with mouth here
+    //         const mouth = document.querySelector("#mouth");
+    //         if (isOverlapping(element, mouth)) {
+    //             element.classList.add("eaten");
+    //         }
+    //     });
+    // });
 }
 
 
@@ -145,46 +151,20 @@ function isOverlapping(el1, el2) {
 }
 
 
-["touchend", "touchcancel"].forEach((eventName) => {
-    element.addEventListener(eventName, () => {
-        isDragging = false;
+let infoBtn = document.querySelector("#info-btn");
+let infoModal = document.querySelector("#info-modal");
+let overlay = document.querySelector("#overlay");
+let closeBtn = document.querySelector("#close-btn");
 
-        const mouth = document.querySelector("#mouth");
+function toggleModal() {
+    infoModal.classList.toggle("open");
+    overlay.classList.toggle("open");
+  }
 
-        if (isOverlapping(element, mouth)) {
-            element.classList.add("eaten");
-        }
-    });
+infoBtn.addEventListener("click", toggleModal);
+closeBtn.addEventListener("click", toggleModal);
+overlay.addEventListener("click", toggleModal);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && infoModal.classList.contains("open")) toggleModal();
 });
-
-
-// $(document).ready(function() {
-//     $("#sandwich").hover(function(){
-//     $("#sandwich").expand(); });
-//     })
-
-
-// $(document).ready(function() {
-//     $("#bananas").click(function(){
-//     $("#ufo").hide(); }); 
-//     })
-
-
-// $(document).ready(function() {
-//     $("#ufo").hover(function(){
-//     $(this).hide();
-//      }); 
-//     })
-
-
-// $(document).ready(function()  {
-//     $("#ufo").hover(function(){
-//             $("#earthling").append(" we come in peach");
-//             });
-//     })
-
-// $(document).ready(function()  {
-//     $("#ufo").hover(function(){
-//         $("#earthling").css("color", "violet");
-//             });
-//         })
