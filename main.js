@@ -10,45 +10,74 @@ window.addEventListener("load", () => {
     });
   });
 
-  
+
 const foods = document.querySelectorAll('.food img');
 const basketImg = document.querySelector('#basket');
+const mouth = document.querySelector("#mouth");
+
+// 1. Function to check if the feast is over
+function checkFeastStatus() {
+    // Select all food items that DO NOT have the 'eaten' class
+    const remainingFood = document.querySelectorAll('.food img:not(.eaten)');
+    
+    if (remainingFood.length === 0) {
+        // Hide the mouth
+        if (mouth) {
+            mouth.style.transition = "opacity 1s ease";
+            mouth.style.opacity = "0";
+            setTimeout(() => mouth.style.display = "none", 500);
+        }
+
+        // Show the thanks message (or create it if it doesn't exist)
+        let message = document.getElementById("feast-message");
+        if (!message) {
+            message = document.createElement("div");
+            message.id = "feast-message";
+            message.innerText = "THANKS FOR THE FEAST! ";
+            // message.style.cssText = "text-align:center; font-size:2rem; margin-top:20px; font-family:sans-serif; color:#333;";
+            // Append it where the mouth was or to the body
+            document.body.appendChild(message);
+        }
+    }
+}
 
 function aboutPage() {
     var popup = document.getElementById("aboutPage");
     popup.classList.toggle("show");
-  }
+}
 
 $(document).ready(function () {
     const draggableIds = ["#sandwich", "#strawberries", "#shrimp", "#chocolatemilk", "#egg", "#salad"];
-    // Get the element with the id "myElement"
 
     draggableIds.forEach((id) => {
+        const element = document.querySelector(id);
+        if (!element) return;
+
         $(id).draggable({
             containment: "window",
-
             stop: function(event, ui) {
-
-            const mouth = document.querySelector("#mouth");
-
-            if (isOverlapping(this, mouth)) {
-                $(this).addClass("eaten");
+                if (isOverlapping(this, mouth)) {
+                    $(this).addClass("eaten");
+                    checkFeastStatus(); // <-- Check here
+                }
             }
-         }
         });
-        enableTouchDrag(document.querySelector(id));
+        
+        enableTouchDrag(element);
     });
 
     $("#mouth").droppable({
-        accept: ".food img",   // only allow food items
+        accept: ".food img",
         drop: function(event, ui) {
-    
-            // ui.draggable = the element being dragged
             $(ui.draggable).addClass("eaten");
-    
+            checkFeastStatus(); // <-- Check here
         }
     });
 });
+
+
+
+
 
 function enableTouchDrag(element) {
     if (!element) return;
