@@ -34,6 +34,7 @@ function checkFeastStatus() {
             message = document.createElement("div");
             message.id = "feast-message";
             message.innerText = "THANKS FOR THE FEAST! ";
+            console.log("Hello!");
             // message.style.cssText = "text-align:center; font-size:2rem; margin-top:20px; font-family:sans-serif; color:#333;";
             // Append it where the mouth was or to the body
             document.body.appendChild(message);
